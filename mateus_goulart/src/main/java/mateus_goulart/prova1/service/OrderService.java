@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +32,10 @@ public class OrderService {
 		repo.save(toEntity(order));
 	}
 	
-	public OrderEntity toEntity (OrderDTO prod) {
-		return new OrderEntity(prod.getOrderNumber(), prod.getProductCode(),
-				prod.getCpf(), prod.getAmount(), prod.getDateOfTheSale(),
-				prod.getOrderValue(), prod.isActive());
+	public OrderEntity toEntity (OrderDTO order) {
+				return new OrderEntity(order.getOrderNumber(), order.getProductCode(),
+				order.getCpf(), order.getAmount(), order.getDateOfTheSale(),
+				order.getOrderValue(), true);
 		}
 	
 	public OrderEntity findById (Long id) {

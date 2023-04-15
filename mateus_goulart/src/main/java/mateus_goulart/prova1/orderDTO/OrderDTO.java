@@ -14,7 +14,6 @@ public class OrderDTO {
 	private int amount;
 	private String dateOfTheSale;
 	private float orderValue;
-	private boolean active;
 	
 	public OrderDTO(OrderEntity order) {
 		this.orderNumber = order.getOrderNumber();
@@ -23,7 +22,7 @@ public class OrderDTO {
 	 	this.amount = order.getAmount();
 	 	this.dateOfTheSale = order.getDateOfTheSale();
 	 	this.orderValue = order.getOrderValue();
-	 	this.active = order.isActive();
+	 	
 
 	}
 	
