@@ -41,13 +41,13 @@ public class OrderService {
 	
 	public OrderEntity findById (Long id) {
 		Optional<OrderEntity> obj = repo.findById(id);
-		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException("Order not found: " + id));
+		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException());
 		return entity;
 	}
 	
 	public OrderEntity handleActive (Long id) {
 		Optional<OrderEntity> obj = repo.findById(id);
-		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException("Order not found: " + id));
+		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException());
 		entity.setActive(!entity.isActive());
 		repo.save(entity);	
 		return entity;

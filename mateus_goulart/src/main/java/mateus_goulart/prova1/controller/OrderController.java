@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import mateus_goulart.prova1.entities.OrderEntity;
 import mateus_goulart.prova1.orderDTO.OrderDTO;
 import mateus_goulart.prova1.service.OrderService;
 
