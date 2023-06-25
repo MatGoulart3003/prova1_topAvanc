@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import mateus_goulart.prova1.entities.OrderEntity;
 import mateus_goulart.prova1.orderDTO.OrderDTO;
 import mateus_goulart.prova1.service.OrderService;
 
@@ -37,16 +38,34 @@ public class OrderController {
 	}
 	
 	@GetMapping("/{code}")
-	public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long code) {
-		OrderDTO objDTO = new OrderDTO (service.findById(code));
-		return ResponseEntity.ok().body(objDTO);
+	public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long code) {		
+		OrderEntity orderChecked = service.findById(code);
+
+		System.out.println(orderChecked);
+		
+		if(orderChecked == null) {
+			return ResponseEntity.notFound().build();
+			
+		}else {
+			OrderDTO objDTO = new OrderDTO (orderChecked);
+			return ResponseEntity.ok().body(objDTO);
+	
+		}	
 	}
 	
-	@PutMapping("handleActive/{code}")
+	@PutMapping("/handleActive/{code}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<OrderDTO> handleActive(@PathVariable Long code) {
-		OrderDTO objDTO = new OrderDTO (service.handleActive(code));
-		return ResponseEntity.ok().body(objDTO);
+		
+		OrderEntity orderChecked = service.findById(code);
+		if(orderChecked == null) {
+			return ResponseEntity.notFound().build();
+		}else {
+
+			OrderDTO objDTO = new OrderDTO (service.handleActive(code));
+			return ResponseEntity.ok().body(objDTO);
+		}
+		
 	}
 	
 }

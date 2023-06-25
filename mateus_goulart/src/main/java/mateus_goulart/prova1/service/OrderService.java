@@ -29,7 +29,13 @@ public class OrderService {
 	}
 	
 	public void createOrder (OrderDTO order) {
-		repo.save(toEntity(order));
+		Optional<OrderEntity> obj = repo.findById(order.getOrderNumber());
+		if (obj == null) {
+			repo.save(toEntity(order));
+		}else {
+			obj.orElse(null);
+		}
+		
 	}
 	
 	public OrderEntity toEntity (OrderDTO order) {
@@ -40,13 +46,13 @@ public class OrderService {
 	
 	public OrderEntity findById (Long id) {
 		Optional<OrderEntity> obj = repo.findById(id);
-		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException());
+		OrderEntity entity = obj.orElse(null);
 		return entity;
 	}
 	
 	public OrderEntity handleActive (Long id) {
 		Optional<OrderEntity> obj = repo.findById(id);
-		OrderEntity entity = obj.orElseThrow(() -> new RuntimeException());
+		OrderEntity entity = obj.orElse(null);
 		entity.setActive(!entity.isActive());
 		repo.save(entity);	
 		return entity;
