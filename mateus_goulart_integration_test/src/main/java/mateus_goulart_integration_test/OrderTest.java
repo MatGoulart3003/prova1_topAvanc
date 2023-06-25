@@ -18,7 +18,7 @@ public class OrderTest {
 	public void testCreateOrderSucess() {		
 		Long orderNumber = 3L;
 		Response resp = createOrderWithId(orderNumber);
-		resp.then().assertThat().statusCode(HttpStatus.SC_CREATED);
+		resp.then().assertThat().statusCode(HttpStatus.SC_OK);
 	}
 	
 	

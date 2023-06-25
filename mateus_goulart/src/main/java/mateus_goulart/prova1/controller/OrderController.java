@@ -27,8 +27,17 @@ public class OrderController {
 	
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createOrder(@RequestBody OrderDTO entity) {
-		service.createOrder(entity);
+	public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO entity) {
+		Long code = entity.getOrderNumber();
+		OrderEntity orderChecked = service.findById(code);
+		if(orderChecked == null) {
+			service.createOrder(entity);
+			return ResponseEntity.ok(entity);
+		}else {
+			return ResponseEntity.badRequest().build();
+		}
+		
+		
 	}
 	
 	@GetMapping()
